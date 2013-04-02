@@ -51,6 +51,8 @@ import net.opengis.gml.x32.FeaturePropertyType;
 import net.opengis.sampling.x20.SFSamplingFeatureDocument;
 import net.opengis.sampling.x20.SFSamplingFeatureType;
 import net.opengis.sos.x20.GetFeatureOfInterestResponseDocument;
+import net.opengis.sos.x20.GetFeatureOfInterestResponseType;
+
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 import org.n52.oxf.OXFException;
@@ -65,6 +67,7 @@ import org.n52.oxf.sos.adapter.SOSAdapter;
 import org.n52.oxf.sos.capabilities.ObservationOffering;
 import org.n52.oxf.sos.util.SosUtil;
 import org.n52.oxf.xmlbeans.parser.XMLHandlingException;
+import org.n52.oxf.xmlbeans.tools.XmlUtil;
 import org.n52.server.oxf.util.ConfigurationContext;
 import org.n52.server.oxf.util.access.AccessorThreadPool;
 import org.n52.server.oxf.util.access.OperationAccessor;
@@ -81,6 +84,7 @@ import org.n52.shared.serializable.pojos.sos.SOSMetadata;
 import org.n52.shared.serializable.pojos.sos.Station;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Node;
 
 public class DefaultMetadataHandler extends MetadataHandler {
 
@@ -308,7 +312,7 @@ public class DefaultMetadataHandler extends MetadataHandler {
 
                     Set<Station> stations = metadata.getStationsByProcedure(procedure.getId());
                     
-                    if (fois.size() <= stations.size()) {
+                    if (fois.size() == stations.size()) {
                         /*
                          * Amount of sampling locations already matches amount of stations. A station update
                          * is sufficient.
@@ -451,40 +455,48 @@ public class DefaultMetadataHandler extends MetadataHandler {
 	protected Collection<String> getFoisByProcedure(SOSAdapter adapter,
 			String sosUrl, String sosVersion, String procedure)
 			throws OXFException {
-		ArrayList<String> fois = new ArrayList<String>();
 		try {
 			ParameterContainer container = new ParameterContainer();
 			container.addParameterShell(GET_FOI_SERVICE_PARAMETER, "SOS");
 			container.addParameterShell(GET_FOI_VERSION_PARAMETER, sosVersion);
 			container.addParameterShell("procedure", procedure);
-			Operation operation = new Operation(GET_FEATURE_OF_INTEREST,
-					sosUrl, sosUrl);
+			
+			// TODO getFOI op NOT mandatory!
+			
+			Operation operation = new Operation(GET_FEATURE_OF_INTEREST, sosUrl, sosUrl);
 			OperationResult result = adapter.doOperation(operation, container);
-			XmlObject foiResponse = XmlObject.Factory.parse(result
-					.getIncomingResultAsStream());
-			if (foiResponse instanceof GetFeatureOfInterestResponseDocument) {
-				GetFeatureOfInterestResponseDocument foiResDoc = (GetFeatureOfInterestResponseDocument) foiResponse;
-				for (FeaturePropertyType featurePropertyType : foiResDoc
-						.getGetFeatureOfInterestResponse()
-						.getFeatureMemberArray()) {
-					SFSamplingFeatureDocument samplingFeature = SFSamplingFeatureDocument.Factory
-							.parse(featurePropertyType.xmlText());
-					SFSamplingFeatureType sfSamplingFeature = samplingFeature
-							.getSFSamplingFeature();
-					fois.add(sfSamplingFeature.getIdentifier()
-							.getStringValue());
-				}
-			} else {
-				throw new OXFException("No valid GetFeatureOfInterestREsponse");
-			}
+			XmlObject foiResponse = XmlObject.Factory.parse(result.getIncomingResultAsStream());
+			
+			return parseFoiIdentifiers(foiResponse);
 		} catch (Exception e) {
-			LOGGER.error("Error while send GetFeatureOfInterest: "
-					+ e.getCause());
+			LOGGER.error("Error while send GetFeatureOfInterest: " + e.getCause());
 			throw new OXFException(e);
-
 		}
-		return fois;
 	}
+
+    protected List<String> parseFoiIdentifiers(XmlObject foiResponse) throws XmlException, OXFException {
+        ArrayList<String> fois = new ArrayList<String>();
+        if (foiResponse instanceof GetFeatureOfInterestResponseDocument) {
+        	GetFeatureOfInterestResponseDocument foiResDoc = (GetFeatureOfInterestResponseDocument) foiResponse;
+        	GetFeatureOfInterestResponseType getFeatureOfInterestResponse = foiResDoc.getGetFeatureOfInterestResponse();
+            FeaturePropertyType[] featureMemberArray = getFeatureOfInterestResponse.getFeatureMemberArray();
+            if (featureMemberArray.length > 0) {
+                for (FeaturePropertyType featurePropertyType : featureMemberArray) {
+                    SFSamplingFeatureDocument samplingFeature = SFSamplingFeatureDocument.Factory.parse(featurePropertyType.xmlText());
+                    SFSamplingFeatureType sfSamplingFeature = samplingFeature.getSFSamplingFeature();
+                    fois.add(sfSamplingFeature.getIdentifier().getStringValue());
+                }
+            } else {
+                Node node = XmlUtil.getDomNode(getFeatureOfInterestResponse, "sams:SF_SpatialSamplingFeature");
+                SFSamplingFeatureDocument samplingFeature = SFSamplingFeatureDocument.Factory.parse(node);
+                SFSamplingFeatureType sfSamplingFeature = samplingFeature.getSFSamplingFeature();
+                fois.add(sfSamplingFeature.getIdentifier().getStringValue());
+            }
+        } else {
+        	throw new OXFException("No GetFeatureOfInterestResponse: " + foiResponse.xmlText());
+        }
+        return fois;
+    }
 
     
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sos:GetFeatureOfInterestResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sams="http://www.opengis.net/samplingSpatial/2.0" xmlns:sf="http://www.opengis.net/sampling/2.0" xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <sams:SF_SpatialSamplingFeature gml:id="sf_1">
+    <gml:description>GWM_59_2</gml:description>
+    <gml:identifier codeSpace="">http://www.portal-tideelbe.org/featureOfInterest/GWM_59_2</gml:identifier>
+    <gml:name>GWM_59-2</gml:name>
+    <sf:type xlink:href="http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint"/>
+    <sf:sampledFeature xlink:href="Nord-Ostsee-Kanal" xlink:role="urn:x-ogc:def:property:water"/>
+    <sams:shape>
+      <gml:Point gml:id="point_sf_1">
+        <gml:pos srsName="http://www.opengis.net/def/crs/EPSG/0/31467">6025017.0 3565335.9</gml:pos>
+      </gml:Point>
+    </sams:shape>
+  </sams:SF_SpatialSamplingFeature>
+</sos:GetFeatureOfInterestResponse>
