@@ -312,7 +312,7 @@ public class DefaultMetadataHandler extends MetadataHandler {
 
                     Set<Station> stations = metadata.getStationsByProcedure(procedure.getId());
                     
-                    if (fois.size() == stations.size()) {
+                    if (fois.size() <= stations.size()) {
                         /*
                          * Amount of sampling locations already matches amount of stations. A station update
                          * is sufficient.
