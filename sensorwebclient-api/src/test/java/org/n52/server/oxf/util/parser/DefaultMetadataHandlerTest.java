@@ -1,6 +1,5 @@
 package org.n52.server.oxf.util.parser;
 
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
