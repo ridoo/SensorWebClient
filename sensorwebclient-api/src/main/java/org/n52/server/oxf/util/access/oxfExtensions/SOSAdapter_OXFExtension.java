@@ -24,6 +24,8 @@
 
 package org.n52.server.oxf.util.access.oxfExtensions;
 
+import static org.n52.server.oxf.util.ConfigurationContext.SERVER_TIMEOUT;
+
 import org.n52.oxf.OXFException;
 import org.n52.oxf.adapter.OperationResult;
 import org.n52.oxf.adapter.ParameterContainer;
@@ -47,10 +49,10 @@ public class SOSAdapter_OXFExtension extends SOSAdapter {
      * @param sosVersion the SOS version the adapter shall connect to.
      */
     public SOSAdapter_OXFExtension(String sosVersion) {
-        super(sosVersion, new SimpleHttpClient(5000, SOCKET_TIMEOUT));
+        super(sosVersion, new SimpleHttpClient((int) SERVER_TIMEOUT, 0));
         setRequestBuilder(SosRequestBuilderFactory.createRequestBuilder(sosVersion));
     }
-
+    
     /**
      * @deprecated use {@link #SOSAdapter_OXFExtension(String)} instead
      * @param sosVersion
@@ -61,7 +63,7 @@ public class SOSAdapter_OXFExtension extends SOSAdapter {
     @Deprecated
     public SOSAdapter_OXFExtension(String sosVersion, ISOSRequestBuilder requestBuilder) {
         super(sosVersion, requestBuilder);
-        setHttpClient(new SimpleHttpClient(5000, SOCKET_TIMEOUT));
+        setHttpClient(new SimpleHttpClient((int) SERVER_TIMEOUT, 0));
     }
 
     @Override

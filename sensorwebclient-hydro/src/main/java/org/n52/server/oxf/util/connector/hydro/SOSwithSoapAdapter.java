@@ -26,6 +26,7 @@ package org.n52.server.oxf.util.connector.hydro;
 
 import static org.n52.oxf.sos.adapter.ISOSRequestBuilder.GET_CAPABILITIES_ACCEPT_VERSIONS_PARAMETER;
 import static org.n52.oxf.sos.adapter.ISOSRequestBuilder.GET_CAPABILITIES_SERVICE_PARAMETER;
+import static org.n52.server.oxf.util.ConfigurationContext.SERVER_TIMEOUT;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -64,7 +65,7 @@ public class SOSwithSoapAdapter extends SOSAdapter {
      *        the SOS version
      */
     public SOSwithSoapAdapter(String sosVersion) {
-        super(sosVersion, new SimpleHttpClient(5000, SOCKET_TIMEOUT));
+        super(sosVersion, new SimpleHttpClient((int) SERVER_TIMEOUT, 0));
         requestBuilder = new SoapSOSRequestBuilder_200();
         setRequestBuilder(requestBuilder);
     }
@@ -85,7 +86,7 @@ public class SOSwithSoapAdapter extends SOSAdapter {
      */
     public SOSwithSoapAdapter(String sosVersion, ISOSRequestBuilder requestBuilder) {
         super(sosVersion, new SoapSOSRequestBuilder_200());
-        setHttpClient(new SimpleHttpClient(5000, SOCKET_TIMEOUT));
+        setHttpClient(new SimpleHttpClient((int) SERVER_TIMEOUT, 0));
         LOGGER.warn("This is a deprecated constructor and will be removed soon w/o notice.");
     }
 

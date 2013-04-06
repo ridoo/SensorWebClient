@@ -24,6 +24,8 @@
 
 package org.n52.server.oxf.util.connector.eea;
 
+import static org.n52.server.oxf.util.ConfigurationContext.SERVER_TIMEOUT;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,7 +73,7 @@ public class SOSAdapterByGET extends SOSAdapter {
      *        the SOS version
      */
     public SOSAdapterByGET(String sosVersion) {
-        super(sosVersion, new SimpleHttpClient(5000, SOCKET_TIMEOUT));
+        super(sosVersion, new SimpleHttpClient((int) SERVER_TIMEOUT, 0));
         setRequestBuilder(new SOSRequestBuilderGET_200());
         HttpClient proxyAwareClient = new ProxyAwareHttpClient(new SimpleHttpClient());
         httpClient = new GzipEnabledHttpClient(proxyAwareClient);
@@ -94,7 +96,7 @@ public class SOSAdapterByGET extends SOSAdapter {
      */
     public SOSAdapterByGET(String sosVersion, ISOSRequestBuilder requestBuilder) {
         super(sosVersion, new SOSRequestBuilderGET_200());
-        setHttpClient(new SimpleHttpClient(5000, SOCKET_TIMEOUT));
+        setHttpClient(new SimpleHttpClient((int) SERVER_TIMEOUT, 0));
         HttpClient proxyAwareClient = new ProxyAwareHttpClient(new SimpleHttpClient());
         httpClient = new GzipEnabledHttpClient(proxyAwareClient);
         LOGGER.warn("This is a deprecated constructor and will be removed soon w/o notice.");
