@@ -334,8 +334,8 @@ public class DefaultMetadataHandler extends MetadataHandler {
                                             station.setFeature(foi);
                                             station.setLocation(eastingNorthing, srs);
                                         }
-                                    } else {
-                                    	iterator.remove();
+//                                    } else {
+//                                    	iterator.remove();
                                     }
                                 }
                             }
