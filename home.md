@@ -1,0 +1,37 @@
+## About
+The Sensor Web Client is a client-server Web application written in Java. It provides discovery and 
+visualization capabilities for data services within the Sensor Web. It comes with an interactive user 
+interface to explore timeseries data but can also be used through a lightweight REST API on top of 
+the Sensor Web's timeseries data access workflow, e.g. through the OGC Sensor Observation Services 
+(SOS) interface.
+
+The client is structured in a modular way so that the web application can be run even without user 
+interface providing a leightweight REST layer only. Besides timeseries data access from SOS servers, 
+the Sensor Web Client also provides a event management component which allows a user to create and 
+subscribe to event notifications so he gets informed by email if certain event criteria occured, e.g. 
+water gauge of river Rhine is over 4.35 meter.
+
+
+
+### Review Timeseries (SOS Module)
+The Sensor Web Client's SOS module allows reviewing phenomenons measured at one or more specific 
+location(s). The data is queried from one or more OGC Sensor Observation Services so that different 
+kinds of observation data can be compared. While one SOS may only provide temperature data measured 
+by a weather station, another can be used to add water gauges of sensor stations nearby. The user 
+interface hide technical details and the complexity of Sensor Web standards. It aims at making access 
+and review of observed continues timeseries data as easy as possible.
+
+
+
+### Event Notification (SES Module)
+Monitoring near real-time observation data is a typical use case for domain experts but also end users 
+who are interested in a sensor measuring a continous phenomenon, e.g. water gauge or temperature. 
+Pull-based messaging is a convenient approach to get notified when certain events happen.
+
+Such a pull-based event notification workflow can be achieved by an SOA architecture incorporating a 
+SensorEventService and a WebNotificationService. An SES server can be used for filtering a data stream 
+by means of predefined rules, whilst the WNS sends out messages to a particular communication endpoint 
+(like SMS, or E-Mail). The Sensor Web Client's event subscription module gives a user control over this 
+architecture. It combines selection, review and subscription on specific timeseries queried via the SOS 
+interface (serveral SOS instances can be configured).
+

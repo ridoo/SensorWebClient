@@ -1,66 +1,24 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="52°North Sensor Web Client : Provides easy access to timeseries data provided by web services of the Sensor Web domain." />
+<head>
+<meta charset='utf-8' />
+<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+<meta name="description"
+	content="52°North Sensor Web Client : Provides easy access to timeseries data provided by web services of the Sensor Web domain." />
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+<link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>52°North Sensor Web Client</title>
-  </head>
+<title>52°North Sensor Web Client</title>
+</head>
 
-  <body>
+<body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/ridoo/SensorWebClient">View on GitHub</a>
+	{% include _includes/header.html %}
 
-          <h1 id="project_title">52°North Sensor Web Client</h1>
-          <h2 id="project_tagline">Provides easy access to timeseries data provided by web services of the Sensor Web domain.</h2>
+    {% include home.md %}
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/ridoo/SensorWebClient/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/ridoo/SensorWebClient/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+	{% include _includes/footer.html %}
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h2>
-<a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>About</h2>
-
-<p>The Sensor Web Client is a client-server Web application written in Java. It provides discovery and visualization capabilities for data services within the Sensor Web. It comes with an interactive user interface to explore timeseries data but can also be used through a lightweight REST API on top of the Sensor Web's timeseries data access workflow, e.g. through the OGC Sensor Observation Services (SOS) interface.</p>
-
-<p>The client is structured in a modular way so that the web application can be run even without user interface providing a leightweight REST layer only. Besides timeseries data access from SOS servers, the Sensor Web Client also provides a event management component which allows a user to create and subscribe to event notifications so he gets informed by email if certain event criteria occured, e.g. water gauge of river Rhine is over 4.35 meter.</p>
-
-<h3>
-<a name="review-timeseries-sos-module" class="anchor" href="#review-timeseries-sos-module"><span class="octicon octicon-link"></span></a>Review Timeseries (SOS Module)</h3>
-
-<p>The Sensor Web Client's SOS module allows reviewing phenomenons measured at one or more specific location(s). The data is queried from one or more OGC Sensor Observation Services so that different kinds of observation data can be compared. While one SOS may only provide temperature data measured by a weather station, another can be used to add water gauges of sensor stations nearby. The user interface hide technical details and the complexity of Sensor Web standards. It aims at making access and review of observed continues timeseries data as easy as possible.</p>
-
-<h3>
-<a name="event-notification-ses-module" class="anchor" href="#event-notification-ses-module"><span class="octicon octicon-link"></span></a>Event Notification (SES Module)</h3>
-
-<p>Monitoring near real-time observation data is a typical use case for domain experts but also end users who are interested in a sensor measuring a continous phenomenon, e.g. water gauge or temperature. Pull-based messaging is a convenient approach to get notified when certain events happen.</p>
-
-<p>Such a pull-based event notification workflow can be achieved by an SOA architecture incorporating a SensorEventService and a WebNotificationService. An SES server can be used for filtering a data stream by means of predefined rules, whilst the WNS sends out messages to a particular communication endpoint (like SMS, or E-Mail). The Sensor Web Client's event subscription module gives a user control over this architecture. It combines selection, review and subscription on specific timeseries queried via the SOS interface (serveral SOS instances can be configured).</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">52°North Sensor Web Client maintained by <a href="https://github.com/ridoo">ridoo</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+</body>
 </html>
