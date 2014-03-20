@@ -27,7 +27,7 @@
  */
 package org.n52.client.ui.map;
 
-import static org.n52.client.sos.ctrl.SosDataManager.getDataManager;
+import static org.n52.client.series.ctrl.SosDataManager.getDataManager;
 
 import java.util.ArrayList;
 
@@ -40,7 +40,7 @@ import org.gwtopenmaps.openlayers.client.event.EventHandler;
 import org.gwtopenmaps.openlayers.client.event.EventObject;
 import org.gwtopenmaps.openlayers.client.popup.FramedCloud;
 import org.gwtopenmaps.openlayers.client.popup.Popup;
-import org.n52.client.sos.legend.TimeseriesLegendData;
+import org.n52.client.series.legend.TimeseriesLegendData;
 import org.n52.shared.serializable.pojos.TimeseriesProperties;
 import org.n52.shared.serializable.pojos.sos.SOSMetadata;
 import org.n52.shared.serializable.pojos.sos.TimeseriesParametersLookup;

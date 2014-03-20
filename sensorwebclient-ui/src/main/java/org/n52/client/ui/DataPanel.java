@@ -34,13 +34,13 @@ import java.util.ArrayList;
 import org.n52.client.Application;
 import org.n52.client.bus.EventBus;
 import org.n52.client.ctrl.DataControls;
-import org.n52.client.sos.event.InitEvent;
-import org.n52.client.sos.event.ResizeEvent;
-import org.n52.client.sos.event.TabSelectedEvent;
-import org.n52.client.sos.event.TimeSeriesChangedEvent;
-import org.n52.client.sos.event.handler.InitEventHandler;
-import org.n52.client.sos.event.handler.TabSelectedEventHandler;
-import org.n52.client.sos.event.handler.TimeSeriesChangedEventHandler;
+import org.n52.client.series.event.InitEvent;
+import org.n52.client.series.event.ResizeEvent;
+import org.n52.client.series.event.TabSelectedEvent;
+import org.n52.client.series.event.TimeSeriesChangedEvent;
+import org.n52.client.series.event.handler.InitEventHandler;
+import org.n52.client.series.event.handler.TabSelectedEventHandler;
+import org.n52.client.series.event.handler.TimeSeriesChangedEventHandler;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Label;
@@ -181,8 +181,8 @@ public class DataPanel extends VLayout {
                     DataPanel.this.getPanel().setWidth100();
                     DataPanel.this.getPanel().setHeight100();
 
-                    org.n52.client.sos.event.TabSelectedEvent customEvent;
-                    customEvent = new org.n52.client.sos.event.TabSelectedEvent(tab);
+                    org.n52.client.series.event.TabSelectedEvent customEvent;
+                    customEvent = new org.n52.client.series.event.TabSelectedEvent(tab);
                     EventBus.getMainEventBus().fireEvent(customEvent);
                 }
             }

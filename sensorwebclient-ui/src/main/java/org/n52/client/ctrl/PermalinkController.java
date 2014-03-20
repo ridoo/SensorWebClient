@@ -28,23 +28,23 @@
 package org.n52.client.ctrl;
 
 import static org.n52.client.bus.EventBus.getMainEventBus;
-import static org.n52.client.sos.ctrl.SosDataManager.getDataManager;
+import static org.n52.client.series.ctrl.SosDataManager.getDataManager;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.n52.client.sos.event.data.NewTimeSeriesEvent;
-import org.n52.client.sos.event.data.StoreFeatureEvent;
-import org.n52.client.sos.event.data.StoreOfferingEvent;
-import org.n52.client.sos.event.data.StorePhenomenaEvent;
-import org.n52.client.sos.event.data.StoreProcedureEvent;
-import org.n52.client.sos.event.data.StoreStationEvent;
-import org.n52.client.sos.event.data.handler.StoreFeatureEventHandler;
-import org.n52.client.sos.event.data.handler.StoreOfferingEventHandler;
-import org.n52.client.sos.event.data.handler.StorePhenomenaEventHandler;
-import org.n52.client.sos.event.data.handler.StoreProcedureEventHandler;
-import org.n52.client.sos.event.data.handler.StoreStationEventHandler;
+import org.n52.client.series.event.data.NewTimeSeriesEvent;
+import org.n52.client.series.event.data.StoreFeatureEvent;
+import org.n52.client.series.event.data.StoreOfferingEvent;
+import org.n52.client.series.event.data.StorePhenomenaEvent;
+import org.n52.client.series.event.data.StoreProcedureEvent;
+import org.n52.client.series.event.data.StoreStationEvent;
+import org.n52.client.series.event.data.handler.StoreFeatureEventHandler;
+import org.n52.client.series.event.data.handler.StoreOfferingEventHandler;
+import org.n52.client.series.event.data.handler.StorePhenomenaEventHandler;
+import org.n52.client.series.event.data.handler.StoreProcedureEventHandler;
+import org.n52.client.series.event.data.handler.StoreStationEventHandler;
 import org.n52.shared.serializable.pojos.TimeseriesRenderingOptions;
 import org.n52.shared.serializable.pojos.sos.SOSMetadata;
 import org.n52.shared.serializable.pojos.sos.SosTimeseries;

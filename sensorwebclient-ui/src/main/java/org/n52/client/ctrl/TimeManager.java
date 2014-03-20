@@ -28,19 +28,19 @@
 package org.n52.client.ctrl;
 
 import static org.n52.client.ctrl.PropertiesManager.getPropertiesManager;
-import static org.n52.client.sos.i18n.SosStringsAccessor.i18n;
+import static org.n52.client.series.i18n.SosStringsAccessor.i18n;
 
 import java.util.Stack;
 
 import org.n52.client.bus.EventBus;
-import org.n52.client.sos.event.DatesChangedEvent;
-import org.n52.client.sos.event.data.OverviewIntervalChangedEvent;
-import org.n52.client.sos.event.data.OverviewIntervalChangedEvent.IntervalType;
-import org.n52.client.sos.event.data.RequestDataEvent;
-import org.n52.client.sos.event.data.UndoEvent;
-import org.n52.client.sos.event.data.handler.OverviewIntervalChangedEventHandler;
-import org.n52.client.sos.event.data.handler.UndoEventHandler;
-import org.n52.client.sos.event.handler.DatesChangedEventHandler;
+import org.n52.client.series.event.DatesChangedEvent;
+import org.n52.client.series.event.data.OverviewIntervalChangedEvent;
+import org.n52.client.series.event.data.RequestDataEvent;
+import org.n52.client.series.event.data.UndoEvent;
+import org.n52.client.series.event.data.OverviewIntervalChangedEvent.IntervalType;
+import org.n52.client.series.event.data.handler.OverviewIntervalChangedEventHandler;
+import org.n52.client.series.event.data.handler.UndoEventHandler;
+import org.n52.client.series.event.handler.DatesChangedEventHandler;
 import org.n52.client.ui.Toaster;
 import org.n52.shared.Constants;
 

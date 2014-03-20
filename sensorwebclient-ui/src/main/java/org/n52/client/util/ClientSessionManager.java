@@ -37,8 +37,8 @@ import static org.n52.shared.session.SessionInfoBuilder.aSessionInfo;
 
 import java.util.Date;
 
-import org.n52.client.ses.event.SetRoleEvent;
-import org.n52.client.ses.event.handler.SetRoleEventHandler;
+import org.n52.client.event.event.SetRoleEvent;
+import org.n52.client.event.event.handler.SetRoleEventHandler;
 import org.n52.shared.session.SessionInfo;
 
 public class ClientSessionManager {

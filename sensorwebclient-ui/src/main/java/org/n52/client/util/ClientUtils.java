@@ -28,7 +28,7 @@
 package org.n52.client.util;
 
 import static org.n52.client.ctrl.PropertiesManager.getPropertiesManager;
-import static org.n52.client.sos.i18n.SosStringsAccessor.i18n;
+import static org.n52.client.series.i18n.SosStringsAccessor.i18n;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -27,24 +27,24 @@
  */
 package org.n52.client.ui.legend;
 
-import static org.n52.client.ses.i18n.SesStringsAccessor.i18n;
+import static org.n52.client.event.i18n.SesStringsAccessor.i18n;
 
 import java.util.Collection;
 import java.util.HashMap;
 
 import org.n52.client.bus.EventBus;
-import org.n52.client.sos.data.TimeseriesDataStore;
-import org.n52.client.sos.event.LegendElementSelectedEvent;
-import org.n52.client.sos.event.data.DeleteTimeSeriesEvent;
-import org.n52.client.sos.event.data.ExportEvent;
-import org.n52.client.sos.event.data.ExportEvent.ExportType;
-import org.n52.client.sos.event.data.ExportFinishedEvent;
-import org.n52.client.sos.event.data.FinishedLoadingTimeSeriesEvent;
-import org.n52.client.sos.event.data.handler.DeleteTimeSeriesEventHandler;
-import org.n52.client.sos.event.data.handler.ExportFinishedEventHandler;
-import org.n52.client.sos.event.data.handler.FinishedLoadingTimeSeriesEventHandler;
-import org.n52.client.sos.event.handler.LegendElementSelectedEventHandler;
-import org.n52.client.sos.legend.TimeseriesLegendData;
+import org.n52.client.series.data.TimeseriesDataStore;
+import org.n52.client.series.event.LegendElementSelectedEvent;
+import org.n52.client.series.event.data.DeleteTimeSeriesEvent;
+import org.n52.client.series.event.data.ExportEvent;
+import org.n52.client.series.event.data.ExportFinishedEvent;
+import org.n52.client.series.event.data.FinishedLoadingTimeSeriesEvent;
+import org.n52.client.series.event.data.ExportEvent.ExportType;
+import org.n52.client.series.event.data.handler.DeleteTimeSeriesEventHandler;
+import org.n52.client.series.event.data.handler.ExportFinishedEventHandler;
+import org.n52.client.series.event.data.handler.FinishedLoadingTimeSeriesEventHandler;
+import org.n52.client.series.event.handler.LegendElementSelectedEventHandler;
+import org.n52.client.series.legend.TimeseriesLegendData;
 
 import com.google.gwt.user.client.Window;
 import com.smartgwt.client.util.BooleanCallback;

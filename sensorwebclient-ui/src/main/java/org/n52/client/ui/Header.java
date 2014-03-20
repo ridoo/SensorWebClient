@@ -30,16 +30,16 @@ package org.n52.client.ui;
 
 import static com.google.gwt.http.client.URL.encodeQueryString;
 import static com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat.ISO_8601;
-import static org.n52.client.sos.data.TimeseriesDataStore.getTimeSeriesDataStore;
-import static org.n52.client.sos.i18n.SosStringsAccessor.i18n;
+import static org.n52.client.series.data.TimeseriesDataStore.getTimeSeriesDataStore;
+import static org.n52.client.series.i18n.SosStringsAccessor.i18n;
 
 import java.util.Date;
 
 import org.n52.client.bus.EventBus;
 import org.n52.client.ctrl.TimeManager;
-import org.n52.client.sos.ctrl.SosDataManager;
-import org.n52.client.sos.event.data.UpdateSOSMetadataEvent;
-import org.n52.client.sos.legend.TimeseriesLegendData;
+import org.n52.client.series.ctrl.SosDataManager;
+import org.n52.client.series.event.data.UpdateSOSMetadataEvent;
+import org.n52.client.series.legend.TimeseriesLegendData;
 import org.n52.client.util.ClientUtils;
 import org.n52.ext.ExternalToolsException;
 import org.n52.ext.link.AccessLinkFactory;

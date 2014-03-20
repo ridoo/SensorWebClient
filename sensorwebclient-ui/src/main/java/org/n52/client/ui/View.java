@@ -29,16 +29,16 @@ package org.n52.client.ui;
 
 import static org.n52.client.bus.EventBus.getMainEventBus;
 import static org.n52.client.ctrl.PropertiesManager.getPropertiesManager;
-import static org.n52.client.sos.i18n.SosStringsAccessor.i18n;
+import static org.n52.client.series.i18n.SosStringsAccessor.i18n;
 import static org.n52.client.ui.Toaster.createToasterInstance;
 
 import java.util.ArrayList;
 
-import org.n52.client.ses.i18n.SesStringsAccessor;
-import org.n52.client.ses.ui.SesTab;
-import org.n52.client.sos.event.TabSelectedEvent;
-import org.n52.client.sos.i18n.SosStringsAccessor;
-import org.n52.client.sos.ui.DiagramTab;
+import org.n52.client.event.i18n.SesStringsAccessor;
+import org.n52.client.event.ui.SesTab;
+import org.n52.client.series.event.TabSelectedEvent;
+import org.n52.client.series.i18n.SosStringsAccessor;
+import org.n52.client.series.ui.DiagramTab;
 import org.n52.client.ui.btn.Button;
 import org.n52.client.ui.legend.Legend;
 import org.n52.client.util.ClientUtils;

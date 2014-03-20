@@ -27,16 +27,16 @@
  */
 package org.n52.client.ui.legend;
 
-import static org.n52.client.sos.i18n.SosStringsAccessor.i18n;
+import static org.n52.client.series.i18n.SosStringsAccessor.i18n;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.gwtopenmaps.openlayers.client.MapWidget;
-import org.n52.client.ses.ui.LoginWindow;
-import org.n52.client.ses.ui.profile.ProfileWindow;
-import org.n52.client.sos.event.data.ExportEvent.ExportType;
-import org.n52.client.sos.ui.StationSelector;
+import org.n52.client.event.ui.LoginWindow;
+import org.n52.client.event.ui.profile.ProfileWindow;
+import org.n52.client.series.event.data.ExportEvent.ExportType;
+import org.n52.client.series.ui.StationSelector;
 import org.n52.client.ui.DataPanel;
 import org.n52.client.ui.DataPanelTab;
 import org.n52.client.ui.Impressum;
