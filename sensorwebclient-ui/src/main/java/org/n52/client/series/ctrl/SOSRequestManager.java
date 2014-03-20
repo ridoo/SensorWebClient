@@ -144,6 +144,8 @@ public class SOSRequestManager extends RequestManager {
 	
 	private static SOSRequestManager instance;
 
+    private RpcTimeSeriesDataServiceAsync timeSeriesDataService;
+
     private RpcSensorMetadataServiceAsync sensorMetadataService;
 
     private RpcQueryServiceAsync queryService;
@@ -166,6 +168,7 @@ public class SOSRequestManager extends RequestManager {
     private void createRpcServices() {
         this.queryService = GWT.create(RpcQueryService.class);
         this.sensorMetadataService = GWT.create(RpcSensorMetadataService.class);
+        this.timeSeriesDataService = GWT.create(RpcTimeSeriesDataService.class);
         this.fileDataService = GWT.create(RpcFileDataService.class);
         this.eesDataService = GWT.create(RpcEESDataService.class);
     }
