@@ -19,7 +19,7 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(TimeseriesServiceImpl.class);
 
-    private String name;
+    private String componentNameToBeProxied;
     
     private ParameterService<PhenomenonOutput> phenomenonaService;
     
@@ -43,18 +43,18 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     
     private SearchService searchService;
     
-    public TimeseriesServiceImpl(String name) {
-        this.name = name;
+    public TimeseriesServiceImpl(String componentNameToBeProxied) {
+        this.componentNameToBeProxied = componentNameToBeProxied;
     }
     
-    public String getName() {
-        return new String(name);
+    public String getComponentNameToBeProxied() {
+        return new String(componentNameToBeProxied);
     }
 
     @Override
     public ParameterService<PhenomenonOutput> getPhenomenaService() {
         if (phenomenonaService == null) {
-            LOGGER.warn("No phenomena service configured for '{}'.", name);
+            LOGGER.warn("No phenomena service configured for '{}'.", componentNameToBeProxied);
         }
         return phenomenonaService;
     }
@@ -62,7 +62,7 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     @Override
     public ParameterService<ProcedureOutput> getProceduresService() {
         if (procedureService == null) {
-            LOGGER.warn("No procedure service configured for '{}'.", name);
+            LOGGER.warn("No procedure service configured for '{}'.", componentNameToBeProxied);
         }
         return procedureService;
     }
@@ -70,7 +70,7 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     @Override
     public ParameterService<CategoryOutput> getCategoriesService() {
         if (categoryService == null) {
-            LOGGER.warn("No procedure service configured for '{}'.", name);
+            LOGGER.warn("No procedure service configured for '{}'.", componentNameToBeProxied);
         }
         return categoryService;
     }
@@ -78,7 +78,7 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     @Override
     public ParameterService<OfferingOutput> getOfferingsService() {
         if (offeringService == null) {
-            LOGGER.warn("No procedure service configured for '{}'.", name);
+            LOGGER.warn("No procedure service configured for '{}'.", componentNameToBeProxied);
         }
         return offeringService;
     }
@@ -86,7 +86,7 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     @Override
     public ParameterService<FeatureOutput> getFeaturesService() {
         if (featureService == null) {
-            LOGGER.warn("No ParameterService<FeatureOutput> configured for '{}'.", name);
+            LOGGER.warn("No ParameterService<FeatureOutput> configured for '{}'.", componentNameToBeProxied);
         }
         return featureService;
     }
@@ -94,7 +94,7 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     @Override
     public ParameterService<StationOutput> getStationsService() {
         if (stationService == null) {
-            LOGGER.warn("No ParameterService<StationOutput configured for '{}'.", name);
+            LOGGER.warn("No ParameterService<StationOutput configured for '{}'.", componentNameToBeProxied);
         }
         return stationService;
     }
@@ -102,7 +102,7 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     @Override
     public ParameterService<TimeseriesMetadataOutput> getTimeseriesService() {
         if (timeseriesService == null) {
-            LOGGER.warn("No ParameterService<TimeseriesMetadataOutput> configured for '{}'.", name);
+            LOGGER.warn("No ParameterService<TimeseriesMetadataOutput> configured for '{}'.", componentNameToBeProxied);
         }
         return timeseriesService;
     }
@@ -110,7 +110,7 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     @Override
     public TimeseriesDataService getTimeseriesDataService() {
         if (timeseriesDataService == null) {
-            LOGGER.warn("No TimeseriesDataService configured for '{}'.", name);
+            LOGGER.warn("No TimeseriesDataService configured for '{}'.", componentNameToBeProxied);
         }
         return timeseriesDataService;
     }
@@ -118,7 +118,7 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     @Override
     public CountingMetadataService getCountingMetadataService() {
         if (contingMetadataService == null) {
-            LOGGER.warn("No CountingMetadataService service configured for '{}'.", name);
+            LOGGER.warn("No CountingMetadataService service configured for '{}'.", componentNameToBeProxied);
         }
         return contingMetadataService;
     }
@@ -126,7 +126,7 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     @Override
     public ServiceParameterService getServicesService() {
         if (servicesService == null) {
-            LOGGER.warn("No ServiceParameterService configured for '{}'.", name);
+            LOGGER.warn("No ServiceParameterService configured for '{}'.", componentNameToBeProxied);
         }
         return servicesService;
     }
@@ -134,7 +134,7 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     @Override
     public SearchService getSearchService() {
         if (searchService == null) {
-            LOGGER.warn("No SearchService configured for '{}'.", name);
+            LOGGER.warn("No SearchService configured for '{}'.", componentNameToBeProxied);
         }
         return searchService;
     }
