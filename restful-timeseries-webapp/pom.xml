@@ -116,14 +116,13 @@
 							<overWrite>false</overWrite>
 						</artifactItem>
 
-						<artifactItem>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>timeseries-web</artifactId>
-							<includes>*.xml,*.json</includes>
-							<!-- tmp files will be copied into WEB-INF/classes -->
-							<outputDirectory>src/main/tmp</outputDirectory>
-							<overWrite>true</overWrite>
-						</artifactItem>
+<!-- 						<artifactItem> -->
+<!-- 							<groupId>${project.groupId}</groupId> -->
+<!-- 							<artifactId>timeseries-web</artifactId> -->
+<!-- 							<includes>*.xml,*.json</includes> -->
+<!-- 							<outputDirectory>src/main/tmp</outputDirectory> -->
+<!-- 							<overWrite>true</overWrite> -->
+<!-- 						</artifactItem> -->
 					</artifactItems>
 				</configuration>
 			</plugin>
@@ -154,8 +153,9 @@
 							<artifactId>sensorwebclient-webapp</artifactId>
 							<includes>
 								<include>ds/sos-instances.data.xml</include>
-								<include>WEB-INF/classes/*.json</include>
-								<include>WEB-INF/classes/*.xml</include>
+                                <include>WEB-INF/classes/locales/*</include>
+								<include>WEB-INF/classes/ehcache.xml</include>
+								<include>WEB-INF/classes/spring-sos-config.xml</include>
 							</includes>
 							<excludes>
 								<exclude>WEB-INF/classes/spring-ses-config.xml</exclude>
