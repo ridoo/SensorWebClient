@@ -1,3 +1,30 @@
+/**
+ * ﻿Copyright (C) 2012-2014 52°North Initiative for Geospatial Open Source
+ * Software GmbH
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License version 2 as publishedby the Free
+ * Software Foundation.
+ *
+ * If the program is linked with libraries which are licensed under one of the
+ * following licenses, the combination of the program with the linked library is
+ * not considered a "derivative work" of the program:
+ *
+ *     - Apache License, version 2.0
+ *     - Apache Software License, version 1.0
+ *     - GNU Lesser General Public License, version 3
+ *     - Mozilla Public License, versions 1.0, 1.1 and 2.0
+ *     - Common Development and Distribution License (CDDL), version 1.0
+ *
+ * Therefore the distribution of the program linked with libraries licensed under
+ * the aforementioned licenses, is permitted by the copyright holders if the
+ * distribution is compliant with both the GNU General Public License version 2
+ * and the aforementioned licenses.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ */
 package org.n52.server.series.proxy;
 
 import org.n52.io.v1.data.CategoryOutput;
@@ -49,6 +76,78 @@ public class TimeseriesServiceImpl implements TimeseriesService {
     
     public String getComponentNameToBeProxied() {
         return new String(componentNameToBeProxied);
+    }
+
+    public ParameterService<PhenomenonOutput> getPhenomenonaService() {
+        return phenomenonaService;
+    }
+
+    public void setPhenomenonaService(ParameterService<PhenomenonOutput> phenomenonaService) {
+        this.phenomenonaService = phenomenonaService;
+    }
+
+    public ParameterService<ProcedureOutput> getProcedureService() {
+        return procedureService;
+    }
+
+    public void setProcedureService(ParameterService<ProcedureOutput> procedureService) {
+        this.procedureService = procedureService;
+    }
+
+    public ParameterService<CategoryOutput> getCategoryService() {
+        return categoryService;
+    }
+
+    public void setCategoryService(ParameterService<CategoryOutput> categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    public ParameterService<OfferingOutput> getOfferingService() {
+        return offeringService;
+    }
+
+    public void setOfferingService(ParameterService<OfferingOutput> offeringService) {
+        this.offeringService = offeringService;
+    }
+
+    public ParameterService<FeatureOutput> getFeatureService() {
+        return featureService;
+    }
+
+    public void setFeatureService(ParameterService<FeatureOutput> featureService) {
+        this.featureService = featureService;
+    }
+
+    public ParameterService<StationOutput> getStationService() {
+        return stationService;
+    }
+
+    public void setStationService(ParameterService<StationOutput> stationService) {
+        this.stationService = stationService;
+    }
+
+    public CountingMetadataService getContingMetadataService() {
+        return contingMetadataService;
+    }
+
+    public void setContingMetadataService(CountingMetadataService contingMetadataService) {
+        this.contingMetadataService = contingMetadataService;
+    }
+
+    public void setTimeseriesService(ParameterService<TimeseriesMetadataOutput> timeseriesService) {
+        this.timeseriesService = timeseriesService;
+    }
+
+    public void setTimeseriesDataService(TimeseriesDataService timeseriesDataService) {
+        this.timeseriesDataService = timeseriesDataService;
+    }
+
+    public void setServicesService(ServiceParameterService servicesService) {
+        this.servicesService = servicesService;
+    }
+
+    public void setSearchService(SearchService searchService) {
+        this.searchService = searchService;
     }
 
     @Override
