@@ -29,13 +29,9 @@ package org.n52.series.api.v1.aggregate;
 
 import org.n52.io.IoParameters;
 import org.n52.io.v1.data.ServiceOutput;
-import org.n52.series.api.v1.aggregate.output.ServiceOutputMerger;
-import org.n52.web.v1.srv.ParameterService;
 import org.n52.web.v1.srv.ServiceParameterService;
 
 public class ServiceOutputAggregator extends TimeseriesServiceProvider implements ServiceParameterService {
-
-    private ServiceOutputMerger merger = new ServiceOutputMerger();
 
     @Override
     public ServiceOutput[] getExpandedParameters(IoParameters query) {
