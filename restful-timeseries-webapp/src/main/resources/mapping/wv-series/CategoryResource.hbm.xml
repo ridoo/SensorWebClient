@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.n52.api.v1.da.beans">
+	<class name="CategoryEntity" table="category">
+		<id name="pkid" type="long">
+			<column name="pkid" />
+			<generator class="assigned">
+			</generator>
+		</id>
+
+		<property name="canonicalId" column="category_id" type="string" />
+		<property name="description" column="description" type="string" />
+		<property name="name" column="category_name" type="string" />
+
+		<set name="translations" table="category_i18n" inverse="true" fetch="select">
+			<key column="category_pkid" />
+			<many-to-many unique="true" column="pkid" class="I18nCategoryEntity" />
+		</set>
+	</class>
+	
+	<class name="I18nCategoryEntity" table="category_i18n">
+        <id name="pkid" type="long">
+            <column name="pkid" />
+            <generator class="assigned">
+            </generator>
+        </id>
+
+        <property name="locale" type="string" />
+        <property name="name" type="string" />
+        <property name="description" type="string" />
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.n52.api.v1.da.beans">
+	<class name="UnitEntity" table="unit">
+		<id name="pkid" type="long">
+			<column name="pkid" />
+			<generator class="assigned">
+			</generator>
+		</id>
+
+        <!-- we map to attribute 'name' to re-use existing i18n logic -->
+        <property name="name" column="unit" type="string" />
+        
+		<set name="translations" table="unit_i18n" inverse="true" fetch="select">
+            <key column="unit_pkid" />
+            <many-to-many unique="true" column="pkid" class="I18nUnitEntity" />
+        </set>
+	</class>
+	
+	<class name="I18nUnitEntity" table="unit_i18n">
+        <id name="pkid" type="long">
+            <column name="pkid" />
+            <generator class="assigned">
+            </generator>
+        </id>
+
+        <!-- we map to attribute 'name' to re-use existing i18n logic -->
+        <property name="name" column="unit" type="string" />
+        <property name="locale" type="string" />
+    </class>
+
+</hibernate-mapping>

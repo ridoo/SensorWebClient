@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.n52.api.v1.da.beans">
+	<class name="ProcedureEntity" table="procedure">
+		<id name="pkid" type="long">
+			<column name="pkid" />
+			<generator class="assigned">
+			</generator>
+		</id>
+		
+        <property name="name" column="procedure_name" type="string" />
+        <property name="canonicalId" column="procedure_id" type="string" />
+        <property name="description" column="description" type="string" />
+        <property name="reference" column="reference_flag" type="org.hibernate.type.NumericBooleanType" />
+		
+        <set name="translations" table="procedure_i18n" inverse="true" fetch="select">
+            <key column="procedure_pkid" />
+            <many-to-many unique="true" column="pkid" class="I18nProcedureEntity" />
+        </set>
+    </class>
+    
+     <class name="I18nProcedureEntity" table="procedure_i18n">
+        <id name="pkid" type="long">
+            <column name="pkid" />
+            <generator class="assigned">
+            </generator>
+        </id>
+
+        <property name="locale" type="string" />
+        <property name="name" type="string" />
+        <property name="description" type="string" />
+    </class>
+
+</hibernate-mapping>
