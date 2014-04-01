@@ -33,7 +33,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.n52.api.v0.io.DesignedParameterSet;
+import org.n52.series.api.v0.io.DesignedParameterSet;
 
 public class DesignedParameterSetTest {
 

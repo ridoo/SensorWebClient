@@ -34,8 +34,8 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 
 import org.junit.Test;
-import org.n52.api.v0.io.Vicinity;
 import org.n52.io.crs.BoundingBox;
+import org.n52.series.api.v0.io.Vicinity;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
