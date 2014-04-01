@@ -34,15 +34,12 @@ import java.util.List;
 
 import org.n52.io.IoParameters;
 import org.n52.io.v1.data.CategoryOutput;
-import org.n52.series.api.v1.aggregate.output.CategoryOutputMerger;
 import org.n52.web.v1.srv.ParameterService;
 
 /**
  * Aggregates the result of multiple category requests by means of a CategoryOutputMerger.
  */
 public class CategoryOutputAggregator extends TimeseriesServiceProvider implements ParameterService<CategoryOutput> {
-
-    private CategoryOutputMerger merger = new CategoryOutputMerger();
 
     @Override
     public CategoryOutput[] getExpandedParameters(IoParameters query) {
