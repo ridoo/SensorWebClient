@@ -125,6 +125,13 @@
 							<outputDirectory>${webappDirectory}</outputDirectory>
 							<overWrite>false</overWrite>
 						</artifactItem>
+						<artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>timeseries-web</artifactId>
+                            <includes>timeseries-api_v1_web.xml</includes>
+                            <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+                            <overWrite>false</overWrite>
+                        </artifactItem>
 					</artifactItems>
 				</configuration>
 			</plugin>

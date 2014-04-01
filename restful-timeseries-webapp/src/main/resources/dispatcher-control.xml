@@ -11,23 +11,33 @@
 
 	<mvc:annotation-driven />
 	
+    <import resource="wv-dao.xml"/>
 	<import resource="sos-proxy.xml"/>
-    <import resource="wv-sos.xml"/>
+    <import resource="timeseries-api_v1_web.xml"/>
 	
-    <bean class="org.n52.web.v1.ctrl.ResourcesController">
-        <property name="metadataService" ref="metadataService" />
-    </bean>
-    
-    <bean class="org.n52.server.series.proxy.TimeseriesServiceAggregator">
+    <bean id="timeseriesServiceAssemble" class="org.n52.series.api.v1.assemble.TimeseriesServiceAssemble">
         <property name="dataServices">
             <util:map>
                 <entry key="sos-proxy" value-ref="sos-proxy" />
-                <entry key="wv-sos" value-ref="wv-sos" />
+                <entry key="wv-dao" value-ref="wv-dao" />
             </util:map>
         </property>
     </bean>
-	
-	
-
+    
+    <bean id="aggregator" class="org.n52.series.api.v1.aggregate.TimeseriesServiceProvider" abstract="true">
+        <property name="assemble" ref="timeseriesServiceAssemble" />
+    </bean>
+    
+    <!-- inject SPI Web controllers -->
+    <bean id="searchService" class="org.n52.series.api.v1.aggregate.SearchOutputAggregator" parent="aggregator" />
+    <bean id="metadataService" class="org.n52.series.api.v1.aggregate.MetadataOutputAggregator" parent="aggregator" />
+    <bean id="serviceParameterService" class="org.n52.series.api.v1.aggregate.ServiceOutputAggregator" parent="aggregator" />
+    <bean id="featureParameterService" class="org.n52.series.api.v1.aggregate.FeatureOutputAggregator" parent="aggregator" />
+    <bean id="stationParameterService" class="org.n52.series.api.v1.aggregate.StationOutputAggregator" parent="aggregator" />
+    <bean id="offeringParameterService" class="org.n52.series.api.v1.aggregate.OfferingOutputAggregator" parent="aggregator" />
+    <bean id="categoryParameterService" class="org.n52.series.api.v1.aggregate.CategoryOutputAggregator" parent="aggregator" />
+    <bean id="procedureParameterService" class="org.n52.series.api.v1.aggregate.ProcedureOutputAggregator" parent="aggregator" />
+    <bean id="phenomenonParameterService" class="org.n52.series.api.v1.aggregate.PhenomenonOutputAggregator" parent="aggregator" />
+    <bean id="timeseriesService" class="org.n52.series.api.v1.aggregate.TimeseriesOutputAggregator" parent="aggregator" />
 
 </beans>

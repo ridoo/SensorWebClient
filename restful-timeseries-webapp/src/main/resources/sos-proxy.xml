@@ -8,105 +8,34 @@
 
     <mvc:annotation-driven />
     
-    <bean name="sos-proxy" class="org.n52.server.series.proxy.TimeseriesServiceImpl">
+    <bean name="sos-proxy" class="org.n52.series.api.v1.assemble.TimeseriesServiceImpl">
        <constructor-arg name="componentNameToBeProxied" value="sos_proxy" />
-       <property name="phenomenonaService" ref="phenomenonParameterService" />
-       <property name="procedureService" ref="phenomenonParameterService" />
-       <property name="categoryService" ref="categoryParameterService" />
-       <property name="offeringService" ref="offeringParameterService" />
-       <property name="featureService" ref="featureParameterService" />
-       <property name="stationService" ref="stationParameterService" />
-       <property name="timeseriesService" ref="timeseriesService" />
-       <property name="timeseriesDataService" ref="timeseriesService" />
-       <property name="servicesService" ref="serviceParameterService" />
-       <property name="searchService" ref="searchService" />
+       <property name="phenomenonaService" ref="proxy_phenomenonParameterService" />
+       <property name="procedureService" ref="proxy_phenomenonParameterService" />
+       <property name="categoryService" ref="proxy_categoryParameterService" />
+       <property name="offeringService" ref="proxy_offeringParameterService" />
+       <property name="timeseriesDataService" ref="proxy_timeseriesService" />
+       <property name="servicesService" ref="proxy_serviceParameterService" />
+       <property name="featureService" ref="proxy_featureParameterService" />
+       <property name="stationService" ref="proxy_stationParameterService" />
+       <property name="contingMetadataService" ref="proxy_metadataService" />
+       <property name="timeseriesService" ref="proxy_timeseriesService" />
+       <property name="searchService" ref="proxy_searchService" />
     </bean>
 
-    <bean class="org.n52.web.v1.ctrl.OfferingsParameterController">
-        <property name="parameterService" ref="offeringParameterService" />
-    </bean>
+    <bean id="proxy_searchService" class="org.n52.series.api.v1.sos.srv.SearchAdapter" />
+    <bean id="proxy_metadataService" class="org.n52.series.api.v1.sos.srv.MetadataAdapter" />
+    <bean id="proxy_serviceParameterService" class="org.n52.series.api.v1.sos.srv.ServiceOutputAdapter" />
+    <bean id="proxy_featureParameterService" class="org.n52.series.api.v1.sos.srv.FeatureOutputAdapter" />
+    <bean id="proxy_stationParameterService" class="org.n52.series.api.v1.sos.srv.StationOutputAdapter" />
+    <bean id="proxy_offeringParameterService" class="org.n52.series.api.v1.sos.srv.OfferingOutputAdapter" />
+    <bean id="proxy_categoryParameterService" class="org.n52.series.api.v1.sos.srv.CategoryOutputAdapter" />
+    <bean id="proxy_procedureParameterService" class="org.n52.series.api.v1.sos.srv.ProcedureOutputAdapter" />
+    <bean id="proxy_phenomenonParameterService" class="org.n52.series.api.v1.sos.srv.PhenomenonOutputAdapter" />
 
-    <bean class="org.n52.web.v1.ctrl.ServicesParameterController">
-        <property name="parameterService" ref="serviceParameterService" />
-    </bean>
-    
-    <bean class="org.n52.web.v1.ctrl.CategoriesParameterController">
-        <property name="parameterService" ref="categoryParameterService" />
-    </bean>
-
-    <bean class="org.n52.web.v1.ctrl.FeaturesParameterController">
-        <property name="parameterService" ref="featureParameterService" />
-    </bean>
-
-    <bean class="org.n52.web.v1.ctrl.ProceduresParameterController">
-        <property name="parameterService" ref="procedureParameterService" />
-    </bean>
-
-    <bean class="org.n52.web.v1.ctrl.PhenomenaParameterController">
-        <property name="parameterService" ref="phenomenonParameterService" />
-    </bean>
-
-    <bean class="org.n52.web.v1.ctrl.StationsParameterController">
-        <property name="parameterService" ref="stationParameterService" />
-    </bean>
-
-    <bean class="org.n52.web.v1.ctrl.TimeseriesMetadataController">
-        <property name="serviceParameterService" ref="serviceParameterService" />
-        <property name="parameterService" ref="timeseriesService" />
-        <property name="configAppliers">
-          <list>
-              <bean class="org.n52.io.RenderingHintsConfigApplier" />
-              <bean class="org.n52.io.StatusIntervalsConfigApplier" />
-          </list>
-        </property>
-    </bean>
-
-    <bean class="org.n52.web.v1.ctrl.TimeseriesDataController">
-        <property name="serviceParameterService" ref="serviceParameterService" />
-        <property name="timeseriesMetadataService" ref="timeseriesService" />
-        <property name="timeseriesDataService" ref="timeseriesService" />
-        <property name="preRenderingTask" ref="preRenderingTask" />
-        <property name="requestIntervalRestriction" value="P1Y1D" />
-    </bean>
-
-    <bean id="preRenderingTask" class="org.n52.io.PreRenderingTask"
-        destroy-method="shutdownTask" factory-method="createTask">
-        <property name="timeseriesMetadataService" ref="timeseriesService" />
-        <property name="timeseriesDataService" ref="timeseriesService" />
-        <property name="outputPath" value="generated/prerendered" />
-        <property name="width" value="800" />
-        <property name="height" value="500" />
-        <property name="language" value="de" />
-        <property name="showGrid" value="true" />
-        <property name="periodInMinutes" value="1440" />
-        <property name="enabled" value="false" />
-    </bean>
-        
-    <bean class="org.n52.web.v1.ctrl.SearchController">
-       <property name="searchService" ref="searchService"/>
-    </bean>
-    
-    <bean id="searchService" class="org.n52.api.v1.srv.SearchAdapter" />
-
-    <bean id="offeringParameterService" class="org.n52.api.v1.srv.OfferingOutputAdapter" />
-    
-    <bean id="categoryParameterService" class="org.n52.api.v1.srv.CategoryOutputAdapter" />
-
-    <bean id="serviceParameterService" class="org.n52.api.v1.srv.ServiceOutputAdapter" />
-
-    <bean id="featureParameterService" class="org.n52.api.v1.srv.FeatureOutputAdapter" />
-
-    <bean id="procedureParameterService" class="org.n52.api.v1.srv.ProcedureOutputAdapter" />
-
-    <bean id="stationParameterService" class="org.n52.api.v1.srv.StationOutputAdapter" />
-
-    <bean id="phenomenonParameterService" class="org.n52.api.v1.srv.PhenomenonOutputAdapter" />
-
-    <bean id="metadataService" class="org.n52.api.v1.srv.MetadataAdapter" />
-
-    <bean id="timeseriesService" class="org.n52.api.v1.srv.TimeseriesOutputAdapter">
+    <bean id="proxy_timeseriesService" class="org.n52.series.api.v1.sos.srv.TimeseriesOutputAdapter">
         <property name="dataService">
-            <bean class="org.n52.api.v1.srv.GetDataService">
+            <bean class="org.n52.series.api.v1.sos.srv.GetDataService">
                 <property name="timeSeriesDataService">
                     <bean class="org.n52.server.service.TimeSeriesDataServiceImpl" />
                 </property>
