@@ -31,15 +31,15 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
-import static org.n52.api.v0.out.TimeseriesData.newTimeseriesData;
+import static org.n52.series.api.v0.out.TimeseriesData.newTimeseriesData;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.n52.api.v0.out.TimeseriesData;
-import org.n52.api.v0.out.TimeseriesData.TimeseriesValue;
+import org.n52.series.api.v0.out.TimeseriesData;
+import org.n52.series.api.v0.out.TimeseriesData.TimeseriesValue;
 
 
 
