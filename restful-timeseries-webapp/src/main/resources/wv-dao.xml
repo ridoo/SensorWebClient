@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <mvc:annotation-driven />
+    
+    <bean name="wv-dao" class="org.n52.series.api.v1.assemble.TimeseriesServiceImpl">
+       <constructor-arg name="componentNameToBeProxied" value="sos_proxy" />
+       <property name="phenomenonaService" ref="dao_phenomenonParameterService" />
+       <property name="procedureService" ref="dao_procedureParameterService" />
+       <property name="categoryService" ref="dao_categoryParameterService" />
+       <property name="offeringService" ref="dao_offeringParameterService" />
+       <property name="timeseriesDataService" ref="dao_timeseriesService" />
+       <property name="servicesService" ref="dao_serviceParameterService" />
+       <property name="featureService" ref="dao_featureParameterService" />
+       <property name="stationService" ref="dao_stationParameterService" />
+       <property name="contingMetadataService" ref="dao_metadataService" />
+       <property name="timeseriesService" ref="dao_timeseriesService" />
+       <property name="searchService" ref="dao_searchService" />
+    </bean>
+
+    <bean id="serviceInfo" class="org.n52.series.api.v1.db.da.beans.ServiceInfo">
+        <property name="serviceId" value="1" />
+        <property name="serviceDescription" value="Wupperverband Timeseries Service." />
+    </bean>
+    
+    <bean id="serviceInfoAccess" class="org.n52.series.api.v1.db.srv.ServiceInfoAccess" abstract="true">
+        <property name="serviceInfo" ref="serviceInfo" />
+    </bean>
+    
+    <bean id="dao_serviceParameterService" class="org.n52.series.api.v1.db.srv.ServiceAccessService" parent="serviceInfoAccess" />
+    <bean id="dao_offeringParameterService" class="org.n52.series.api.v1.db.srv.OfferingsAccessService" parent="serviceInfoAccess" />
+    <bean id="dao_categoryParameterService" class="org.n52.series.api.v1.db.srv.CategoriesAccessService" parent="serviceInfoAccess" />
+    <bean id="dao_featureParameterService" class="org.n52.series.api.v1.db.srv.FeaturesAccessService" parent="serviceInfoAccess" />
+    <bean id="dao_procedureParameterService" class="org.n52.series.api.v1.db.srv.ProceduresAccessService" parent="serviceInfoAccess" />
+    <bean id="dao_stationParameterService" class="org.n52.series.api.v1.db.srv.StationsAccessService" parent="serviceInfoAccess" >
+       <constructor-arg name="dbSrid" value="EPSG:31466" />
+    </bean>
+    <bean id="dao_phenomenonParameterService" class="org.n52.series.api.v1.db.srv.PhenomenaAccessService"  parent="serviceInfoAccess" />
+    <bean id="dao_timeseriesService" class="org.n52.series.api.v1.db.srv.TimeseriesAccessService" parent="serviceInfoAccess" />
+    <bean id="dao_searchService" class="org.n52.series.api.v1.db.srv.Search" parent="serviceInfoAccess" />
+    <bean id="dao_metadataService" class="org.n52.series.api.v1.db.srv.MetadataAccessService" />
+
+</beans>
