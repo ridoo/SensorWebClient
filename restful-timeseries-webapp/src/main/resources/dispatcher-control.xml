@@ -11,7 +11,7 @@
 
 	<mvc:annotation-driven />
 	
-    <import resource="wv-dao.xml"/>
+<!--     <import resource="wv-dao.xml"/> -->
 	<import resource="sos-proxy.xml"/>
     <import resource="timeseries-api_v1_web.xml"/>
 	
@@ -19,7 +19,7 @@
         <property name="dataServices">
             <util:map>
                 <entry key="sos-proxy" value-ref="sos-proxy" />
-                <entry key="wv-dao" value-ref="wv-dao" />
+<!--                 <entry key="wv-dao" value-ref="wv-dao" /> -->
             </util:map>
         </property>
     </bean>
