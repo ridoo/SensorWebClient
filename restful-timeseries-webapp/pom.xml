@@ -30,35 +30,32 @@
 		<dependency>
 			<groupId>org.n52.sensorweb</groupId>
 			<artifactId>sensorwebclient-api</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.validation</groupId>
+					<artifactId>validation-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.n52.sensorweb</groupId>
-			<artifactId>sensorwebclient-sos-server</artifactId>
+			<artifactId>sensorwebclient-hydro</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.n52.sensorweb</groupId>
+			<artifactId>sensorwebclient-ags</artifactId>
+		</dependency>
+
         <dependency>
             <groupId>org.n52.sensorweb</groupId>
-            <artifactId>sensorwebclient-sos-shared</artifactId>
+            <artifactId>sensorwebclient-sos-rest</artifactId>
         </dependency>
-		<dependency>
-			<groupId>org.n52.sensorweb</groupId>
-			<artifactId>sensorwebclient-sos-rest</artifactId>
-		</dependency>
-		
-		<dependency>
+        <dependency>
             <groupId>org.n52.sensorweb.sos.wv</groupId>
             <artifactId>rest-dao</artifactId>
             <version>1.1.1-SNAPSHOT</version>
-		</dependency>
-		
-        <dependency>
-            <groupId>org.n52.sensorweb</groupId>
-            <artifactId>sensorwebclient-hydro</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.n52.sensorweb</groupId>
-            <artifactId>sensorwebclient-ags</artifactId>
-        </dependency>
-		
+        
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -80,6 +77,18 @@
 			<version>${logback.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.1.0.Final</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgis</groupId>
+            <artifactId>postgis-jdbc</artifactId>
+            <version>2.0.1</version>
+            <scope>runtime</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -119,6 +128,13 @@
 				<configuration>
 					<artifactItems>
 						<artifactItem>
+							<groupId>org.n52.sensorweb.sos.wv</groupId>
+							<artifactId>rest-dao</artifactId>
+							<includes>mapping/wv-series/**</includes>
+							<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+							<overWrite>false</overWrite>
+						</artifactItem>
+						<artifactItem>
 							<groupId>${project.groupId}</groupId>
 							<artifactId>timeseries-web</artifactId>
 							<includes>api-doc/**</includes>
@@ -126,12 +142,12 @@
 							<overWrite>false</overWrite>
 						</artifactItem>
 						<artifactItem>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>timeseries-web</artifactId>
-                            <includes>timeseries-api_v1_web.xml</includes>
-                            <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
-                            <overWrite>false</overWrite>
-                        </artifactItem>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>timeseries-web</artifactId>
+							<includes>timeseries-api_v1_web.xml</includes>
+							<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+							<overWrite>false</overWrite>
+						</artifactItem>
 					</artifactItems>
 				</configuration>
 			</plugin>
@@ -162,7 +178,7 @@
 							<artifactId>sensorwebclient-webapp</artifactId>
 							<includes>
 								<include>ds/sos-instances.data.xml</include>
-                                <include>WEB-INF/classes/locales/*</include>
+								<include>WEB-INF/classes/locales/*</include>
 								<include>WEB-INF/classes/ehcache.xml</include>
 								<include>WEB-INF/classes/spring-sos-config.xml</include>
 							</includes>
@@ -192,6 +208,6 @@
 			</build>
 		</profile>
 
-    </profiles>
+	</profiles>
 </project>
 

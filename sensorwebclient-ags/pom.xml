@@ -19,6 +19,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.n52.sensorweb</groupId>
+			<artifactId>sensorwebclient-api</artifactId>
+            <type>test-jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.n52.sensorweb</groupId>
 			<artifactId>52n-oxf-sml-v101</artifactId>
 		</dependency>
 		<!-- ### EXTERNAL DEPENDENCIES ### -->
