@@ -85,11 +85,6 @@
         <finalName>${project.artifactId}</finalName>
         <resources>
             <resource>
-                <!-- copy resource files from external modules -->
-                <directory>src/main/tmp</directory>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
                 <!-- copy and filter -->
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
@@ -118,11 +113,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
             </plugin>
 
             <plugin>
@@ -178,40 +168,6 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
-                <configuration>
-                    <artifactItems>
-                        <artifactItem>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>sensorwebclient-sos-rest</artifactId>
-                            <includes>explorer/**</includes>
-                            <outputDirectory>${webappDirectory}</outputDirectory>
-                            <overWrite>false</overWrite>
-                        </artifactItem>
-
-                        <artifactItem>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>timeseries-web</artifactId>
-                            <includes>api-doc/**</includes>
-                            <outputDirectory>${webappDirectory}</outputDirectory>
-                            <overWrite>false</overWrite>
-                        </artifactItem>
-
-                    </artifactItems>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
@@ -231,7 +187,81 @@
                     <warName>${sensorwebclient.webapp.name}</warName>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                    </execution>
+                </executions>
 
+                <configuration>
+                    <artifactItems>
+                        
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>sensorwebclient-ui</artifactId>
+                            <includes>client/**,WEB-INF/**</includes>
+                            <outputDirectory>${webappDirectory}</outputDirectory>
+                            <overWrite>true</overWrite>
+                        </artifactItem>
+                        
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>sensorwebclient-sos-rest</artifactId>
+                            <includes>explorer/**</includes>
+                            <outputDirectory>${webappDirectory}</outputDirectory>
+                            <overWrite>false</overWrite>
+                        </artifactItem>
+
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>timeseries-web</artifactId>
+                            <includes>api-doc/**</includes>
+                            <outputDirectory>${webappDirectory}</outputDirectory>
+                            <overWrite>false</overWrite>
+                        </artifactItem>
+
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>timeseries-web</artifactId>
+                            <includes>*.json</includes>
+                            <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+                            <overWrite>false</overWrite>
+                        </artifactItem>
+                        
+                        <artifactItem>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>timeseries-web</artifactId>
+                            <includes>timeseries-api_v1_web.xml</includes>
+                            <outputDirectory>${webappDirectory}/WEB-INF/spring</outputDirectory>
+                            <overWrite>false</overWrite>
+                        </artifactItem>
+                    </artifactItems>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <stopKey>C</stopKey>
+                    <stopPort>34343</stopPort>
+                    <reload>manual</reload>
+                    <webApp>
+                        <contextPath>/${project.build.finalName}</contextPath>
+                        <allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
+                        <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+                            <resourcesAsCSV>${webappDirectory},src/main/webapp</resourcesAsCSV>
+                        </baseResource>
+                    </webApp>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     

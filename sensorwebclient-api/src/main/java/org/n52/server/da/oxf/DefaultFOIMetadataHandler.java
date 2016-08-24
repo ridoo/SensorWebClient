@@ -178,6 +178,8 @@ public class DefaultFOIMetadataHandler extends DefaultMetadataHandler {
                     final List<String> phenomenons = parser.getPhenomenons();
                     LOGGER.debug("#{} phenomena for procedure '{}'", phenomenons.size(), procedureId);
 
+                        }
+                    }
                     Map<String, List<Station>> phen2Stations = new HashMap<String, List<Station>>();
 
                     try {
@@ -185,6 +187,7 @@ public class DefaultFOIMetadataHandler extends DefaultMetadataHandler {
                             final String uom = parser.buildUpSensorMetadataUom(phenomenonId);
                             final Phenomenon phenomenon = lookup.getPhenomenon(phenomenonId);
                             if (phenomenon != null) {
+                            	// actually wrong but stay backward compatible, correct: timeseries.setUom()
                                 phenomenon.setUnitOfMeasure(uom);
                             } else {
                                 LOGGER.error("Phenomenon '{}' is unknown and ignored. Check the offerings!", phenomenonId);
@@ -201,20 +204,27 @@ public class DefaultFOIMetadataHandler extends DefaultMetadataHandler {
                     } catch (Exception e) {
                         LOGGER.warn("Could not execute the GetFeatureOfInterest request.", e);
                     }
-
-                    LOGGER.debug("Linking feature<->phenomenon<->procedure(<->offering) to timeseries");
-                    for (String phenomenonId : phen2Stations.keySet()) {
-
-                        final Collection<SosTimeseries> paramConstellations = getMatchingConstellations(observingTimeseries,
-                                procedureId,
-                                phenomenonId);
-
-                        for (final Station station : phen2Stations.get(phenomenonId)) {
+                    for (final String featureId : fois) {
+                        Station station = metadata.getStation(featureId);
+                        for (final String phenomenon : phenomenons) {
+                            final String uom = parser.buildUpSensorMetadataUom(phenomenon);
+                            final Phenomenon lokupPhen = lookup.getPhenomenon(phenomenon);
+                            if (lokupPhen != null) {
+                            	// actually wrong but stay backward compatible, correct: timeseries.setUom()
+                            	lokupPhen.setUnitOfMeasure(uom);
+                            } else {
+                            	LOGGER.error("Could not find matching phenomenon in internal 'lookup' storage for '{}'",phenomenon);
+                            }
+                            final Collection<SosTimeseries> paramConstellations = getMatchingConstellations(observingTimeseries,
+                                                                                                      procedureId,
+                                                                                                      phenomenon);
                             for (final SosTimeseries timseries : paramConstellations) {
+                                station.addTimeseries(timseries);
                                 Feature feature = station.getFeature();
                                 Station existingStation = metadata.getStationByFeature(feature);
                                 SosTimeseries newTimeseries = timseries.clone();
                                 newTimeseries.setFeature(feature);
+                            	newTimeseries.setUom(uom);
                                 existingStation.addTimeseries(newTimeseries);
                                 LOGGER.trace("New timeseries added: {}", newTimeseries.toString());
                             }

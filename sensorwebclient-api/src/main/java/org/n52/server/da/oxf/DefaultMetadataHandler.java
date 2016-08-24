@@ -207,7 +207,8 @@ public class DefaultMetadataHandler extends MetadataHandler {
                             final String uom = parser.buildUpSensorMetadataUom(phenomenon);
                             final Phenomenon lokupPhen = lookup.getPhenomenon(phenomenon);
                             if (lokupPhen != null) {
-                                lokupPhen.setUnitOfMeasure(uom);
+                            	 // actually wrong but stay backward compatible, correct: timeseries.setUom()
+                            	lokupPhen.setUnitOfMeasure(uom);
                             } else {
                                 LOGGER.error("Could not find matching phenomenon in internal 'lookup' storage for '{}'", phenomenon);
                             }
@@ -220,7 +221,8 @@ public class DefaultMetadataHandler extends MetadataHandler {
                                 if (!lookup.containsFeature(featureId)) {
                                     lookup.addFeature(new Feature(featureId, sosUrl));
                                 }
-                                timseries.setFeature(new Feature(featureId, sosUrl));
+                                timseries.setUom(uom);
+                                timseries.setFeature(feature);
                                 station.addTimeseries(timseries);
                             }
                         }

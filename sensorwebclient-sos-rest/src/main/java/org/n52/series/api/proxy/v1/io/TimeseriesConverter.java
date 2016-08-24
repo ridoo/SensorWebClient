@@ -68,11 +68,10 @@ public class TimeseriesConverter extends OutputConverter<SosTimeseries, Timeseri
     @Override
     public TimeseriesMetadataOutput convertCondensed(SosTimeseries timeseries) {
         SeriesMetadataV1Output convertedTimeseries = new SeriesMetadataV1Output();
-        Phenomenon phenomenon = getLookup().getPhenomenon(timeseries.getPhenomenonId());
         convertedTimeseries.setStation(getCondensedStation(timeseries));
-        convertedTimeseries.setUom(phenomenon.getUnitOfMeasure());
         convertedTimeseries.setId(timeseries.getTimeseriesId());
         convertedTimeseries.setLabel(timeseries.getLabel());
+        convertedTimeseries.setUom(timeseries.getUom());
         return convertedTimeseries;
     }
 
